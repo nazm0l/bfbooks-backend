@@ -1,5 +1,9 @@
 import { Request, Response } from "express";
-import { createBookInDB, getAllBooksFromDB } from "./book.service";
+import {
+  createBookInDB,
+  getAllBooksFromDB,
+  getBookByIdFromDB,
+} from "./book.service";
 
 export const createBook = async (req: Request, res: Response) => {
   try {
@@ -14,6 +18,15 @@ export const getAllBooks = async (req: Request, res: Response) => {
   try {
     const books = await getAllBooksFromDB();
     res.status(200).json(books);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const getBookById = async (req: Request, res: Response) => {
+  try {
+    const book = await getBookByIdFromDB(req.params.id);
+    res.status(200).json(book);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

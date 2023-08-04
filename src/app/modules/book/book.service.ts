@@ -9,3 +9,8 @@ export const createBookInDB = async (book: IBook) => {
 export const getAllBooksFromDB = async () => {
   return await Book.find();
 };
+
+export const getBookByIdFromDB = async (id: string) => {
+  const book = await Book.findById(id);
+  return book;
+};
